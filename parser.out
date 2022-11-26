@@ -1,0 +1,3151 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BETWEEN
+    DQ
+    IN
+    NOT
+    SQ
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> statements_list
+Rule 2     start -> configs ; statements_list
+Rule 3     configs -> config
+Rule 4     configs -> configs ; config
+Rule 5     config -> SET LOG TRUE
+Rule 6     config -> SET LOG FALSE
+Rule 7     config -> SET LOG PATH STRING
+Rule 8     config -> SET LOG PRINT TRUE
+Rule 9     config -> SET LOG PRINT FALSE
+Rule 10    statements_list -> statement
+Rule 11    statements_list -> statements_list ; statement
+Rule 12    statement -> select_statement
+Rule 13    statement -> insert_statement
+Rule 14    statement -> update_statement
+Rule 15    statement -> delete_statement
+Rule 16    select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+Rule 17    select_statement -> SELECT agg_columns_list FROM ds conditions group order limit offset
+Rule 18    select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+Rule 19    select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+Rule 20    select_statement -> SELECT agg_columns_list FROM ds joins conditions group order
+Rule 21    insert_statement -> INSERT INTO ds ( columns_list ) VALUES rows
+Rule 22    insert_statement -> INSERT INTO ds VALUES rows
+Rule 23    insert_statement -> INSERT INTO ds ( columns_list ) select_statement
+Rule 24    insert_statement -> INSERT INTO ds select_statement
+Rule 25    update_statement -> UPDATE ds SET rec_set conditions
+Rule 26    delete_statement -> DELETE FROM ds conditions
+Rule 27    rec_set -> column = value
+Rule 28    rec_set -> rec_set , column = value
+Rule 29    joins -> join_type ds ON conditions
+Rule 30    joins -> joins join_type ds ON conditions
+Rule 31    join_type -> JOIN
+Rule 32    join_type -> INNER JOIN
+Rule 33    join_type -> LEFT JOIN
+Rule 34    join_type -> RIGHT JOIN
+Rule 35    join_type -> FULL JOIN
+Rule 36    rows -> ( rec_values )
+Rule 37    rows -> ( rec_values ) , rows
+Rule 38    rec_values -> value
+Rule 39    rec_values -> rec_values , value
+Rule 40    columns_list -> *
+Rule 41    columns_list -> rec_columns
+Rule 42    agg_columns_list -> *
+Rule 43    agg_columns_list -> agg_rec_columns
+Rule 44    agg_rec_columns -> t_column
+Rule 45    agg_rec_columns -> agg_rec_columns , t_column
+Rule 46    rec_columns -> column
+Rule 47    rec_columns -> rec_columns , column
+Rule 48    t_column -> column
+Rule 49    t_column -> function
+Rule 50    t_column -> column AS NAME
+Rule 51    t_column -> function AS NAME
+Rule 52    column -> NAME
+Rule 53    column -> INDEX
+Rule 54    function -> function_name ( column )
+Rule 55    function_name -> SUM
+Rule 56    function_name -> MAX
+Rule 57    function_name -> MIN
+Rule 58    function_name -> COUNT
+Rule 59    function_name -> AVG
+Rule 60    ds -> ( select_statement )
+Rule 61    ds -> ( select_statement ) AS NAME
+Rule 62    ds -> src
+Rule 63    ds -> src AS NAME
+Rule 64    src -> NAME
+Rule 65    src -> DATASOURCE
+Rule 66    limit -> LIMIT NUMBER
+Rule 67    limit -> empty
+Rule 68    offset -> OFFSET NUMBER
+Rule 69    offset -> empty
+Rule 70    conditions -> WHERE rec_conditions
+Rule 71    conditions -> rec_conditions
+Rule 72    conditions -> empty
+Rule 73    rec_conditions -> column op value
+Rule 74    rec_conditions -> rec_conditions AND column op value
+Rule 75    rec_conditions -> rec_conditions OR column op value
+Rule 76    value -> NAME
+Rule 77    value -> STRING
+Rule 78    value -> FLOAT
+Rule 79    value -> NUMBER
+Rule 80    value -> column
+Rule 81    empty -> <empty>
+Rule 82    op -> >
+Rule 83    op -> <
+Rule 84    op -> =
+Rule 85    op -> LE
+Rule 86    op -> GE
+Rule 87    op -> NE
+Rule 88    op -> LIKE
+Rule 89    group -> GROUP BY columns_list
+Rule 90    group -> empty
+Rule 91    order -> ORDER BY orders
+Rule 92    order -> empty
+Rule 93    orders -> column sort_type
+Rule 94    orders -> orders , column sort_type
+Rule 95    sort_type -> ASC
+Rule 96    sort_type -> DESC
+Rule 97    sort_type -> empty
+
+Terminals, with rules where they appear
+
+(                    : 21 23 36 37 54 60 61
+)                    : 21 23 36 37 54 60 61
+*                    : 40 42
+,                    : 28 37 39 45 47 94
+;                    : 2 4 11
+<                    : 83
+=                    : 27 28 84
+>                    : 82
+AND                  : 74
+AS                   : 50 51 61 63
+ASC                  : 95
+AVG                  : 59
+BETWEEN              : 
+BY                   : 89 91
+COUNT                : 58
+DATASOURCE           : 65
+DELETE               : 26
+DESC                 : 96
+DISTINCT             : 16 19
+DQ                   : 
+FALSE                : 6 9
+FLOAT                : 78
+FROM                 : 16 17 18 19 20 26
+FULL                 : 35
+GE                   : 86
+GROUP                : 89
+IN                   : 
+INDEX                : 53
+INNER                : 32
+INSERT               : 21 22 23 24
+INTO                 : 18 21 22 23 24
+JOIN                 : 31 32 33 34 35
+LE                   : 85
+LEFT                 : 33
+LIKE                 : 88
+LIMIT                : 66
+LOG                  : 5 6 7 8 9
+MAX                  : 56
+MIN                  : 57
+NAME                 : 50 51 52 61 63 64 76
+NE                   : 87
+NOT                  : 
+NUMBER               : 66 68 79
+OFFSET               : 68
+ON                   : 29 30
+OR                   : 75
+ORDER                : 91
+PATH                 : 7
+PRINT                : 8 9
+RIGHT                : 34
+SELECT               : 16 17 18 19 20
+SET                  : 5 6 7 8 9 25
+SQ                   : 
+STRING               : 7 77
+SUM                  : 55
+TRUE                 : 5 8
+UPDATE               : 25
+VALUES               : 21 22
+WHERE                : 70
+error                : 
+
+Nonterminals, with rules where they appear
+
+agg_columns_list     : 16 17 18 19 20
+agg_rec_columns      : 43 45
+column               : 27 28 46 47 48 50 54 73 74 75 80 93 94
+columns_list         : 21 23 89
+conditions           : 16 17 18 19 20 25 26 29 30
+config               : 3 4
+configs              : 2 4
+delete_statement     : 15
+ds                   : 16 17 18 18 19 20 21 22 23 24 25 26 29 30
+empty                : 67 69 72 90 92 97
+function             : 49 51
+function_name        : 54
+group                : 16 17 19 20
+insert_statement     : 13
+join_type            : 29 30
+joins                : 19 20 30
+limit                : 16 17 18
+offset               : 16 17 18
+op                   : 73 74 75
+order                : 16 17 19 20
+orders               : 91 94
+rec_columns          : 41 47
+rec_conditions       : 70 71 74 75
+rec_set              : 25 28
+rec_values           : 36 37 39
+rows                 : 21 22 37
+select_statement     : 12 23 24 60 61
+sort_type            : 93 94
+src                  : 62 63
+start                : 0
+statement            : 10 11
+statements_list      : 1 2 11
+t_column             : 44 45
+update_statement     : 14
+value                : 27 28 38 39 73 74 75
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . statements_list
+    (2) start -> . configs ; statements_list
+    (10) statements_list -> . statement
+    (11) statements_list -> . statements_list ; statement
+    (3) configs -> . config
+    (4) configs -> . configs ; config
+    (12) statement -> . select_statement
+    (13) statement -> . insert_statement
+    (14) statement -> . update_statement
+    (15) statement -> . delete_statement
+    (5) config -> . SET LOG TRUE
+    (6) config -> . SET LOG FALSE
+    (7) config -> . SET LOG PATH STRING
+    (8) config -> . SET LOG PRINT TRUE
+    (9) config -> . SET LOG PRINT FALSE
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+    (21) insert_statement -> . INSERT INTO ds ( columns_list ) VALUES rows
+    (22) insert_statement -> . INSERT INTO ds VALUES rows
+    (23) insert_statement -> . INSERT INTO ds ( columns_list ) select_statement
+    (24) insert_statement -> . INSERT INTO ds select_statement
+    (25) update_statement -> . UPDATE ds SET rec_set conditions
+    (26) delete_statement -> . DELETE FROM ds conditions
+
+    SET             shift and go to state 10
+    SELECT          shift and go to state 11
+    INSERT          shift and go to state 12
+    UPDATE          shift and go to state 13
+    DELETE          shift and go to state 14
+
+    start                          shift and go to state 1
+    statements_list                shift and go to state 2
+    configs                        shift and go to state 3
+    statement                      shift and go to state 4
+    config                         shift and go to state 5
+    select_statement               shift and go to state 6
+    insert_statement               shift and go to state 7
+    update_statement               shift and go to state 8
+    delete_statement               shift and go to state 9
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> statements_list .
+    (11) statements_list -> statements_list . ; statement
+
+    $end            reduce using rule 1 (start -> statements_list .)
+    ;               shift and go to state 15
+
+
+state 3
+
+    (2) start -> configs . ; statements_list
+    (4) configs -> configs . ; config
+
+    ;               shift and go to state 16
+
+
+state 4
+
+    (10) statements_list -> statement .
+
+    ;               reduce using rule 10 (statements_list -> statement .)
+    $end            reduce using rule 10 (statements_list -> statement .)
+
+
+state 5
+
+    (3) configs -> config .
+
+    ;               reduce using rule 3 (configs -> config .)
+
+
+state 6
+
+    (12) statement -> select_statement .
+
+    ;               reduce using rule 12 (statement -> select_statement .)
+    $end            reduce using rule 12 (statement -> select_statement .)
+
+
+state 7
+
+    (13) statement -> insert_statement .
+
+    ;               reduce using rule 13 (statement -> insert_statement .)
+    $end            reduce using rule 13 (statement -> insert_statement .)
+
+
+state 8
+
+    (14) statement -> update_statement .
+
+    ;               reduce using rule 14 (statement -> update_statement .)
+    $end            reduce using rule 14 (statement -> update_statement .)
+
+
+state 9
+
+    (15) statement -> delete_statement .
+
+    ;               reduce using rule 15 (statement -> delete_statement .)
+    $end            reduce using rule 15 (statement -> delete_statement .)
+
+
+state 10
+
+    (5) config -> SET . LOG TRUE
+    (6) config -> SET . LOG FALSE
+    (7) config -> SET . LOG PATH STRING
+    (8) config -> SET . LOG PRINT TRUE
+    (9) config -> SET . LOG PRINT FALSE
+
+    LOG             shift and go to state 17
+
+
+state 11
+
+    (16) select_statement -> SELECT . DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> SELECT . agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> SELECT . agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> SELECT . DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> SELECT . agg_columns_list FROM ds joins conditions group order
+    (42) agg_columns_list -> . *
+    (43) agg_columns_list -> . agg_rec_columns
+    (44) agg_rec_columns -> . t_column
+    (45) agg_rec_columns -> . agg_rec_columns , t_column
+    (48) t_column -> . column
+    (49) t_column -> . function
+    (50) t_column -> . column AS NAME
+    (51) t_column -> . function AS NAME
+    (52) column -> . NAME
+    (53) column -> . INDEX
+    (54) function -> . function_name ( column )
+    (55) function_name -> . SUM
+    (56) function_name -> . MAX
+    (57) function_name -> . MIN
+    (58) function_name -> . COUNT
+    (59) function_name -> . AVG
+
+    DISTINCT        shift and go to state 18
+    *               shift and go to state 20
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+    SUM             shift and go to state 28
+    MAX             shift and go to state 29
+    MIN             shift and go to state 30
+    COUNT           shift and go to state 31
+    AVG             shift and go to state 32
+
+    agg_columns_list               shift and go to state 19
+    agg_rec_columns                shift and go to state 21
+    t_column                       shift and go to state 22
+    column                         shift and go to state 23
+    function                       shift and go to state 24
+    function_name                  shift and go to state 27
+
+state 12
+
+    (21) insert_statement -> INSERT . INTO ds ( columns_list ) VALUES rows
+    (22) insert_statement -> INSERT . INTO ds VALUES rows
+    (23) insert_statement -> INSERT . INTO ds ( columns_list ) select_statement
+    (24) insert_statement -> INSERT . INTO ds select_statement
+
+    INTO            shift and go to state 33
+
+
+state 13
+
+    (25) update_statement -> UPDATE . ds SET rec_set conditions
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 34
+    src                            shift and go to state 37
+
+state 14
+
+    (26) delete_statement -> DELETE . FROM ds conditions
+
+    FROM            shift and go to state 39
+
+
+state 15
+
+    (11) statements_list -> statements_list ; . statement
+    (12) statement -> . select_statement
+    (13) statement -> . insert_statement
+    (14) statement -> . update_statement
+    (15) statement -> . delete_statement
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+    (21) insert_statement -> . INSERT INTO ds ( columns_list ) VALUES rows
+    (22) insert_statement -> . INSERT INTO ds VALUES rows
+    (23) insert_statement -> . INSERT INTO ds ( columns_list ) select_statement
+    (24) insert_statement -> . INSERT INTO ds select_statement
+    (25) update_statement -> . UPDATE ds SET rec_set conditions
+    (26) delete_statement -> . DELETE FROM ds conditions
+
+    SELECT          shift and go to state 11
+    INSERT          shift and go to state 12
+    UPDATE          shift and go to state 13
+    DELETE          shift and go to state 14
+
+    statement                      shift and go to state 40
+    select_statement               shift and go to state 6
+    insert_statement               shift and go to state 7
+    update_statement               shift and go to state 8
+    delete_statement               shift and go to state 9
+
+state 16
+
+    (2) start -> configs ; . statements_list
+    (4) configs -> configs ; . config
+    (10) statements_list -> . statement
+    (11) statements_list -> . statements_list ; statement
+    (5) config -> . SET LOG TRUE
+    (6) config -> . SET LOG FALSE
+    (7) config -> . SET LOG PATH STRING
+    (8) config -> . SET LOG PRINT TRUE
+    (9) config -> . SET LOG PRINT FALSE
+    (12) statement -> . select_statement
+    (13) statement -> . insert_statement
+    (14) statement -> . update_statement
+    (15) statement -> . delete_statement
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+    (21) insert_statement -> . INSERT INTO ds ( columns_list ) VALUES rows
+    (22) insert_statement -> . INSERT INTO ds VALUES rows
+    (23) insert_statement -> . INSERT INTO ds ( columns_list ) select_statement
+    (24) insert_statement -> . INSERT INTO ds select_statement
+    (25) update_statement -> . UPDATE ds SET rec_set conditions
+    (26) delete_statement -> . DELETE FROM ds conditions
+
+    SET             shift and go to state 10
+    SELECT          shift and go to state 11
+    INSERT          shift and go to state 12
+    UPDATE          shift and go to state 13
+    DELETE          shift and go to state 14
+
+    statements_list                shift and go to state 41
+    config                         shift and go to state 42
+    statement                      shift and go to state 4
+    select_statement               shift and go to state 6
+    insert_statement               shift and go to state 7
+    update_statement               shift and go to state 8
+    delete_statement               shift and go to state 9
+
+state 17
+
+    (5) config -> SET LOG . TRUE
+    (6) config -> SET LOG . FALSE
+    (7) config -> SET LOG . PATH STRING
+    (8) config -> SET LOG . PRINT TRUE
+    (9) config -> SET LOG . PRINT FALSE
+
+    TRUE            shift and go to state 43
+    FALSE           shift and go to state 44
+    PATH            shift and go to state 45
+    PRINT           shift and go to state 46
+
+
+state 18
+
+    (16) select_statement -> SELECT DISTINCT . agg_columns_list FROM ds conditions group order limit offset
+    (19) select_statement -> SELECT DISTINCT . agg_columns_list FROM ds joins conditions group order
+    (42) agg_columns_list -> . *
+    (43) agg_columns_list -> . agg_rec_columns
+    (44) agg_rec_columns -> . t_column
+    (45) agg_rec_columns -> . agg_rec_columns , t_column
+    (48) t_column -> . column
+    (49) t_column -> . function
+    (50) t_column -> . column AS NAME
+    (51) t_column -> . function AS NAME
+    (52) column -> . NAME
+    (53) column -> . INDEX
+    (54) function -> . function_name ( column )
+    (55) function_name -> . SUM
+    (56) function_name -> . MAX
+    (57) function_name -> . MIN
+    (58) function_name -> . COUNT
+    (59) function_name -> . AVG
+
+    *               shift and go to state 20
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+    SUM             shift and go to state 28
+    MAX             shift and go to state 29
+    MIN             shift and go to state 30
+    COUNT           shift and go to state 31
+    AVG             shift and go to state 32
+
+    agg_columns_list               shift and go to state 47
+    agg_rec_columns                shift and go to state 21
+    t_column                       shift and go to state 22
+    column                         shift and go to state 23
+    function                       shift and go to state 24
+    function_name                  shift and go to state 27
+
+state 19
+
+    (17) select_statement -> SELECT agg_columns_list . FROM ds conditions group order limit offset
+    (18) select_statement -> SELECT agg_columns_list . INTO ds FROM ds conditions limit offset
+    (20) select_statement -> SELECT agg_columns_list . FROM ds joins conditions group order
+
+    FROM            shift and go to state 48
+    INTO            shift and go to state 49
+
+
+state 20
+
+    (42) agg_columns_list -> * .
+
+    FROM            reduce using rule 42 (agg_columns_list -> * .)
+    INTO            reduce using rule 42 (agg_columns_list -> * .)
+
+
+state 21
+
+    (43) agg_columns_list -> agg_rec_columns .
+    (45) agg_rec_columns -> agg_rec_columns . , t_column
+
+    FROM            reduce using rule 43 (agg_columns_list -> agg_rec_columns .)
+    INTO            reduce using rule 43 (agg_columns_list -> agg_rec_columns .)
+    ,               shift and go to state 50
+
+
+state 22
+
+    (44) agg_rec_columns -> t_column .
+
+    ,               reduce using rule 44 (agg_rec_columns -> t_column .)
+    FROM            reduce using rule 44 (agg_rec_columns -> t_column .)
+    INTO            reduce using rule 44 (agg_rec_columns -> t_column .)
+
+
+state 23
+
+    (48) t_column -> column .
+    (50) t_column -> column . AS NAME
+
+    ,               reduce using rule 48 (t_column -> column .)
+    FROM            reduce using rule 48 (t_column -> column .)
+    INTO            reduce using rule 48 (t_column -> column .)
+    AS              shift and go to state 51
+
+
+state 24
+
+    (49) t_column -> function .
+    (51) t_column -> function . AS NAME
+
+    ,               reduce using rule 49 (t_column -> function .)
+    FROM            reduce using rule 49 (t_column -> function .)
+    INTO            reduce using rule 49 (t_column -> function .)
+    AS              shift and go to state 52
+
+
+state 25
+
+    (52) column -> NAME .
+
+    AS              reduce using rule 52 (column -> NAME .)
+    ,               reduce using rule 52 (column -> NAME .)
+    FROM            reduce using rule 52 (column -> NAME .)
+    INTO            reduce using rule 52 (column -> NAME .)
+    )               reduce using rule 52 (column -> NAME .)
+    =               reduce using rule 52 (column -> NAME .)
+    >               reduce using rule 52 (column -> NAME .)
+    <               reduce using rule 52 (column -> NAME .)
+    LE              reduce using rule 52 (column -> NAME .)
+    GE              reduce using rule 52 (column -> NAME .)
+    NE              reduce using rule 52 (column -> NAME .)
+    LIKE            reduce using rule 52 (column -> NAME .)
+    ORDER           reduce using rule 52 (column -> NAME .)
+    LIMIT           reduce using rule 52 (column -> NAME .)
+    OFFSET          reduce using rule 52 (column -> NAME .)
+    ;               reduce using rule 52 (column -> NAME .)
+    $end            reduce using rule 52 (column -> NAME .)
+    ASC             reduce using rule 52 (column -> NAME .)
+    DESC            reduce using rule 52 (column -> NAME .)
+
+
+state 26
+
+    (53) column -> INDEX .
+
+    AS              reduce using rule 53 (column -> INDEX .)
+    ,               reduce using rule 53 (column -> INDEX .)
+    FROM            reduce using rule 53 (column -> INDEX .)
+    INTO            reduce using rule 53 (column -> INDEX .)
+    )               reduce using rule 53 (column -> INDEX .)
+    =               reduce using rule 53 (column -> INDEX .)
+    >               reduce using rule 53 (column -> INDEX .)
+    <               reduce using rule 53 (column -> INDEX .)
+    LE              reduce using rule 53 (column -> INDEX .)
+    GE              reduce using rule 53 (column -> INDEX .)
+    NE              reduce using rule 53 (column -> INDEX .)
+    LIKE            reduce using rule 53 (column -> INDEX .)
+    WHERE           reduce using rule 53 (column -> INDEX .)
+    NAME            reduce using rule 53 (column -> INDEX .)
+    INDEX           reduce using rule 53 (column -> INDEX .)
+    ;               reduce using rule 53 (column -> INDEX .)
+    $end            reduce using rule 53 (column -> INDEX .)
+    AND             reduce using rule 53 (column -> INDEX .)
+    OR              reduce using rule 53 (column -> INDEX .)
+    GROUP           reduce using rule 53 (column -> INDEX .)
+    ORDER           reduce using rule 53 (column -> INDEX .)
+    LIMIT           reduce using rule 53 (column -> INDEX .)
+    OFFSET          reduce using rule 53 (column -> INDEX .)
+    JOIN            reduce using rule 53 (column -> INDEX .)
+    INNER           reduce using rule 53 (column -> INDEX .)
+    LEFT            reduce using rule 53 (column -> INDEX .)
+    RIGHT           reduce using rule 53 (column -> INDEX .)
+    FULL            reduce using rule 53 (column -> INDEX .)
+    ASC             reduce using rule 53 (column -> INDEX .)
+    DESC            reduce using rule 53 (column -> INDEX .)
+
+
+state 27
+
+    (54) function -> function_name . ( column )
+
+    (               shift and go to state 53
+
+
+state 28
+
+    (55) function_name -> SUM .
+
+    (               reduce using rule 55 (function_name -> SUM .)
+
+
+state 29
+
+    (56) function_name -> MAX .
+
+    (               reduce using rule 56 (function_name -> MAX .)
+
+
+state 30
+
+    (57) function_name -> MIN .
+
+    (               reduce using rule 57 (function_name -> MIN .)
+
+
+state 31
+
+    (58) function_name -> COUNT .
+
+    (               reduce using rule 58 (function_name -> COUNT .)
+
+
+state 32
+
+    (59) function_name -> AVG .
+
+    (               reduce using rule 59 (function_name -> AVG .)
+
+
+state 33
+
+    (21) insert_statement -> INSERT INTO . ds ( columns_list ) VALUES rows
+    (22) insert_statement -> INSERT INTO . ds VALUES rows
+    (23) insert_statement -> INSERT INTO . ds ( columns_list ) select_statement
+    (24) insert_statement -> INSERT INTO . ds select_statement
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 54
+    src                            shift and go to state 37
+
+state 34
+
+    (25) update_statement -> UPDATE ds . SET rec_set conditions
+
+    SET             shift and go to state 55
+
+
+state 35
+
+    (60) ds -> ( . select_statement )
+    (61) ds -> ( . select_statement ) AS NAME
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+
+    SELECT          shift and go to state 11
+
+    select_statement               shift and go to state 56
+
+state 36
+
+    (64) src -> NAME .
+
+    AS              reduce using rule 64 (src -> NAME .)
+    SET             reduce using rule 64 (src -> NAME .)
+    (               reduce using rule 64 (src -> NAME .)
+    VALUES          reduce using rule 64 (src -> NAME .)
+    SELECT          reduce using rule 64 (src -> NAME .)
+    WHERE           reduce using rule 64 (src -> NAME .)
+    NAME            reduce using rule 64 (src -> NAME .)
+    INDEX           reduce using rule 64 (src -> NAME .)
+    ;               reduce using rule 64 (src -> NAME .)
+    $end            reduce using rule 64 (src -> NAME .)
+    JOIN            reduce using rule 64 (src -> NAME .)
+    INNER           reduce using rule 64 (src -> NAME .)
+    LEFT            reduce using rule 64 (src -> NAME .)
+    RIGHT           reduce using rule 64 (src -> NAME .)
+    FULL            reduce using rule 64 (src -> NAME .)
+    GROUP           reduce using rule 64 (src -> NAME .)
+    ORDER           reduce using rule 64 (src -> NAME .)
+    LIMIT           reduce using rule 64 (src -> NAME .)
+    OFFSET          reduce using rule 64 (src -> NAME .)
+    )               reduce using rule 64 (src -> NAME .)
+    FROM            reduce using rule 64 (src -> NAME .)
+    ON              reduce using rule 64 (src -> NAME .)
+
+
+state 37
+
+    (62) ds -> src .
+    (63) ds -> src . AS NAME
+
+    SET             reduce using rule 62 (ds -> src .)
+    (               reduce using rule 62 (ds -> src .)
+    VALUES          reduce using rule 62 (ds -> src .)
+    SELECT          reduce using rule 62 (ds -> src .)
+    WHERE           reduce using rule 62 (ds -> src .)
+    NAME            reduce using rule 62 (ds -> src .)
+    INDEX           reduce using rule 62 (ds -> src .)
+    ;               reduce using rule 62 (ds -> src .)
+    $end            reduce using rule 62 (ds -> src .)
+    JOIN            reduce using rule 62 (ds -> src .)
+    INNER           reduce using rule 62 (ds -> src .)
+    LEFT            reduce using rule 62 (ds -> src .)
+    RIGHT           reduce using rule 62 (ds -> src .)
+    FULL            reduce using rule 62 (ds -> src .)
+    GROUP           reduce using rule 62 (ds -> src .)
+    ORDER           reduce using rule 62 (ds -> src .)
+    LIMIT           reduce using rule 62 (ds -> src .)
+    OFFSET          reduce using rule 62 (ds -> src .)
+    )               reduce using rule 62 (ds -> src .)
+    FROM            reduce using rule 62 (ds -> src .)
+    ON              reduce using rule 62 (ds -> src .)
+    AS              shift and go to state 57
+
+
+state 38
+
+    (65) src -> DATASOURCE .
+
+    AS              reduce using rule 65 (src -> DATASOURCE .)
+    SET             reduce using rule 65 (src -> DATASOURCE .)
+    (               reduce using rule 65 (src -> DATASOURCE .)
+    VALUES          reduce using rule 65 (src -> DATASOURCE .)
+    SELECT          reduce using rule 65 (src -> DATASOURCE .)
+    WHERE           reduce using rule 65 (src -> DATASOURCE .)
+    NAME            reduce using rule 65 (src -> DATASOURCE .)
+    INDEX           reduce using rule 65 (src -> DATASOURCE .)
+    ;               reduce using rule 65 (src -> DATASOURCE .)
+    $end            reduce using rule 65 (src -> DATASOURCE .)
+    JOIN            reduce using rule 65 (src -> DATASOURCE .)
+    INNER           reduce using rule 65 (src -> DATASOURCE .)
+    LEFT            reduce using rule 65 (src -> DATASOURCE .)
+    RIGHT           reduce using rule 65 (src -> DATASOURCE .)
+    FULL            reduce using rule 65 (src -> DATASOURCE .)
+    GROUP           reduce using rule 65 (src -> DATASOURCE .)
+    ORDER           reduce using rule 65 (src -> DATASOURCE .)
+    LIMIT           reduce using rule 65 (src -> DATASOURCE .)
+    OFFSET          reduce using rule 65 (src -> DATASOURCE .)
+    )               reduce using rule 65 (src -> DATASOURCE .)
+    FROM            reduce using rule 65 (src -> DATASOURCE .)
+    ON              reduce using rule 65 (src -> DATASOURCE .)
+
+
+state 39
+
+    (26) delete_statement -> DELETE FROM . ds conditions
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 58
+    src                            shift and go to state 37
+
+state 40
+
+    (11) statements_list -> statements_list ; statement .
+
+    ;               reduce using rule 11 (statements_list -> statements_list ; statement .)
+    $end            reduce using rule 11 (statements_list -> statements_list ; statement .)
+
+
+state 41
+
+    (2) start -> configs ; statements_list .
+    (11) statements_list -> statements_list . ; statement
+
+    $end            reduce using rule 2 (start -> configs ; statements_list .)
+    ;               shift and go to state 15
+
+
+state 42
+
+    (4) configs -> configs ; config .
+
+    ;               reduce using rule 4 (configs -> configs ; config .)
+
+
+state 43
+
+    (5) config -> SET LOG TRUE .
+
+    ;               reduce using rule 5 (config -> SET LOG TRUE .)
+
+
+state 44
+
+    (6) config -> SET LOG FALSE .
+
+    ;               reduce using rule 6 (config -> SET LOG FALSE .)
+
+
+state 45
+
+    (7) config -> SET LOG PATH . STRING
+
+    STRING          shift and go to state 59
+
+
+state 46
+
+    (8) config -> SET LOG PRINT . TRUE
+    (9) config -> SET LOG PRINT . FALSE
+
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+
+
+state 47
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list . FROM ds conditions group order limit offset
+    (19) select_statement -> SELECT DISTINCT agg_columns_list . FROM ds joins conditions group order
+
+    FROM            shift and go to state 62
+
+
+state 48
+
+    (17) select_statement -> SELECT agg_columns_list FROM . ds conditions group order limit offset
+    (20) select_statement -> SELECT agg_columns_list FROM . ds joins conditions group order
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 63
+    src                            shift and go to state 37
+
+state 49
+
+    (18) select_statement -> SELECT agg_columns_list INTO . ds FROM ds conditions limit offset
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 64
+    src                            shift and go to state 37
+
+state 50
+
+    (45) agg_rec_columns -> agg_rec_columns , . t_column
+    (48) t_column -> . column
+    (49) t_column -> . function
+    (50) t_column -> . column AS NAME
+    (51) t_column -> . function AS NAME
+    (52) column -> . NAME
+    (53) column -> . INDEX
+    (54) function -> . function_name ( column )
+    (55) function_name -> . SUM
+    (56) function_name -> . MAX
+    (57) function_name -> . MIN
+    (58) function_name -> . COUNT
+    (59) function_name -> . AVG
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+    SUM             shift and go to state 28
+    MAX             shift and go to state 29
+    MIN             shift and go to state 30
+    COUNT           shift and go to state 31
+    AVG             shift and go to state 32
+
+    t_column                       shift and go to state 65
+    column                         shift and go to state 23
+    function                       shift and go to state 24
+    function_name                  shift and go to state 27
+
+state 51
+
+    (50) t_column -> column AS . NAME
+
+    NAME            shift and go to state 66
+
+
+state 52
+
+    (51) t_column -> function AS . NAME
+
+    NAME            shift and go to state 67
+
+
+state 53
+
+    (54) function -> function_name ( . column )
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 68
+
+state 54
+
+    (21) insert_statement -> INSERT INTO ds . ( columns_list ) VALUES rows
+    (22) insert_statement -> INSERT INTO ds . VALUES rows
+    (23) insert_statement -> INSERT INTO ds . ( columns_list ) select_statement
+    (24) insert_statement -> INSERT INTO ds . select_statement
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+
+    (               shift and go to state 69
+    VALUES          shift and go to state 70
+    SELECT          shift and go to state 11
+
+    select_statement               shift and go to state 71
+
+state 55
+
+    (25) update_statement -> UPDATE ds SET . rec_set conditions
+    (27) rec_set -> . column = value
+    (28) rec_set -> . rec_set , column = value
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    rec_set                        shift and go to state 72
+    column                         shift and go to state 73
+
+state 56
+
+    (60) ds -> ( select_statement . )
+    (61) ds -> ( select_statement . ) AS NAME
+
+    )               shift and go to state 74
+
+
+state 57
+
+    (63) ds -> src AS . NAME
+
+    NAME            shift and go to state 75
+
+
+state 58
+
+    (26) delete_statement -> DELETE FROM ds . conditions
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 76
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 59
+
+    (7) config -> SET LOG PATH STRING .
+
+    ;               reduce using rule 7 (config -> SET LOG PATH STRING .)
+
+
+state 60
+
+    (8) config -> SET LOG PRINT TRUE .
+
+    ;               reduce using rule 8 (config -> SET LOG PRINT TRUE .)
+
+
+state 61
+
+    (9) config -> SET LOG PRINT FALSE .
+
+    ;               reduce using rule 9 (config -> SET LOG PRINT FALSE .)
+
+
+state 62
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM . ds conditions group order limit offset
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM . ds joins conditions group order
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 81
+    src                            shift and go to state 37
+
+state 63
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds . conditions group order limit offset
+    (20) select_statement -> SELECT agg_columns_list FROM ds . joins conditions group order
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (29) joins -> . join_type ds ON conditions
+    (30) joins -> . joins join_type ds ON conditions
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (31) join_type -> . JOIN
+    (32) join_type -> . INNER JOIN
+    (33) join_type -> . LEFT JOIN
+    (34) join_type -> . RIGHT JOIN
+    (35) join_type -> . FULL JOIN
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    JOIN            shift and go to state 85
+    INNER           shift and go to state 86
+    LEFT            shift and go to state 87
+    RIGHT           shift and go to state 88
+    FULL            shift and go to state 89
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 82
+    joins                          shift and go to state 83
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    join_type                      shift and go to state 84
+    column                         shift and go to state 80
+
+state 64
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds . FROM ds conditions limit offset
+
+    FROM            shift and go to state 90
+
+
+state 65
+
+    (45) agg_rec_columns -> agg_rec_columns , t_column .
+
+    ,               reduce using rule 45 (agg_rec_columns -> agg_rec_columns , t_column .)
+    FROM            reduce using rule 45 (agg_rec_columns -> agg_rec_columns , t_column .)
+    INTO            reduce using rule 45 (agg_rec_columns -> agg_rec_columns , t_column .)
+
+
+state 66
+
+    (50) t_column -> column AS NAME .
+
+    ,               reduce using rule 50 (t_column -> column AS NAME .)
+    FROM            reduce using rule 50 (t_column -> column AS NAME .)
+    INTO            reduce using rule 50 (t_column -> column AS NAME .)
+
+
+state 67
+
+    (51) t_column -> function AS NAME .
+
+    ,               reduce using rule 51 (t_column -> function AS NAME .)
+    FROM            reduce using rule 51 (t_column -> function AS NAME .)
+    INTO            reduce using rule 51 (t_column -> function AS NAME .)
+
+
+state 68
+
+    (54) function -> function_name ( column . )
+
+    )               shift and go to state 91
+
+
+state 69
+
+    (21) insert_statement -> INSERT INTO ds ( . columns_list ) VALUES rows
+    (23) insert_statement -> INSERT INTO ds ( . columns_list ) select_statement
+    (40) columns_list -> . *
+    (41) columns_list -> . rec_columns
+    (46) rec_columns -> . column
+    (47) rec_columns -> . rec_columns , column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    *               shift and go to state 93
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    columns_list                   shift and go to state 92
+    rec_columns                    shift and go to state 94
+    column                         shift and go to state 95
+
+state 70
+
+    (22) insert_statement -> INSERT INTO ds VALUES . rows
+    (36) rows -> . ( rec_values )
+    (37) rows -> . ( rec_values ) , rows
+
+    (               shift and go to state 97
+
+    rows                           shift and go to state 96
+
+state 71
+
+    (24) insert_statement -> INSERT INTO ds select_statement .
+
+    ;               reduce using rule 24 (insert_statement -> INSERT INTO ds select_statement .)
+    $end            reduce using rule 24 (insert_statement -> INSERT INTO ds select_statement .)
+
+
+state 72
+
+    (25) update_statement -> UPDATE ds SET rec_set . conditions
+    (28) rec_set -> rec_set . , column = value
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    ,               shift and go to state 99
+    WHERE           shift and go to state 77
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 98
+    column                         shift and go to state 80
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+
+state 73
+
+    (27) rec_set -> column . = value
+
+    =               shift and go to state 100
+
+
+state 74
+
+    (60) ds -> ( select_statement ) .
+    (61) ds -> ( select_statement ) . AS NAME
+
+    SET             reduce using rule 60 (ds -> ( select_statement ) .)
+    (               reduce using rule 60 (ds -> ( select_statement ) .)
+    VALUES          reduce using rule 60 (ds -> ( select_statement ) .)
+    SELECT          reduce using rule 60 (ds -> ( select_statement ) .)
+    WHERE           reduce using rule 60 (ds -> ( select_statement ) .)
+    NAME            reduce using rule 60 (ds -> ( select_statement ) .)
+    INDEX           reduce using rule 60 (ds -> ( select_statement ) .)
+    ;               reduce using rule 60 (ds -> ( select_statement ) .)
+    $end            reduce using rule 60 (ds -> ( select_statement ) .)
+    JOIN            reduce using rule 60 (ds -> ( select_statement ) .)
+    INNER           reduce using rule 60 (ds -> ( select_statement ) .)
+    LEFT            reduce using rule 60 (ds -> ( select_statement ) .)
+    RIGHT           reduce using rule 60 (ds -> ( select_statement ) .)
+    FULL            reduce using rule 60 (ds -> ( select_statement ) .)
+    GROUP           reduce using rule 60 (ds -> ( select_statement ) .)
+    ORDER           reduce using rule 60 (ds -> ( select_statement ) .)
+    LIMIT           reduce using rule 60 (ds -> ( select_statement ) .)
+    OFFSET          reduce using rule 60 (ds -> ( select_statement ) .)
+    )               reduce using rule 60 (ds -> ( select_statement ) .)
+    FROM            reduce using rule 60 (ds -> ( select_statement ) .)
+    ON              reduce using rule 60 (ds -> ( select_statement ) .)
+    AS              shift and go to state 101
+
+
+state 75
+
+    (63) ds -> src AS NAME .
+
+    SET             reduce using rule 63 (ds -> src AS NAME .)
+    (               reduce using rule 63 (ds -> src AS NAME .)
+    VALUES          reduce using rule 63 (ds -> src AS NAME .)
+    SELECT          reduce using rule 63 (ds -> src AS NAME .)
+    WHERE           reduce using rule 63 (ds -> src AS NAME .)
+    NAME            reduce using rule 63 (ds -> src AS NAME .)
+    INDEX           reduce using rule 63 (ds -> src AS NAME .)
+    ;               reduce using rule 63 (ds -> src AS NAME .)
+    $end            reduce using rule 63 (ds -> src AS NAME .)
+    JOIN            reduce using rule 63 (ds -> src AS NAME .)
+    INNER           reduce using rule 63 (ds -> src AS NAME .)
+    LEFT            reduce using rule 63 (ds -> src AS NAME .)
+    RIGHT           reduce using rule 63 (ds -> src AS NAME .)
+    FULL            reduce using rule 63 (ds -> src AS NAME .)
+    GROUP           reduce using rule 63 (ds -> src AS NAME .)
+    ORDER           reduce using rule 63 (ds -> src AS NAME .)
+    LIMIT           reduce using rule 63 (ds -> src AS NAME .)
+    OFFSET          reduce using rule 63 (ds -> src AS NAME .)
+    )               reduce using rule 63 (ds -> src AS NAME .)
+    FROM            reduce using rule 63 (ds -> src AS NAME .)
+    ON              reduce using rule 63 (ds -> src AS NAME .)
+
+
+state 76
+
+    (26) delete_statement -> DELETE FROM ds conditions .
+
+    ;               reduce using rule 26 (delete_statement -> DELETE FROM ds conditions .)
+    $end            reduce using rule 26 (delete_statement -> DELETE FROM ds conditions .)
+
+
+state 77
+
+    (70) conditions -> WHERE . rec_conditions
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    rec_conditions                 shift and go to state 102
+    column                         shift and go to state 80
+
+state 78
+
+    (71) conditions -> rec_conditions .
+    (74) rec_conditions -> rec_conditions . AND column op value
+    (75) rec_conditions -> rec_conditions . OR column op value
+
+    ;               reduce using rule 71 (conditions -> rec_conditions .)
+    $end            reduce using rule 71 (conditions -> rec_conditions .)
+    GROUP           reduce using rule 71 (conditions -> rec_conditions .)
+    ORDER           reduce using rule 71 (conditions -> rec_conditions .)
+    LIMIT           reduce using rule 71 (conditions -> rec_conditions .)
+    OFFSET          reduce using rule 71 (conditions -> rec_conditions .)
+    )               reduce using rule 71 (conditions -> rec_conditions .)
+    WHERE           reduce using rule 71 (conditions -> rec_conditions .)
+    JOIN            reduce using rule 71 (conditions -> rec_conditions .)
+    INNER           reduce using rule 71 (conditions -> rec_conditions .)
+    LEFT            reduce using rule 71 (conditions -> rec_conditions .)
+    RIGHT           reduce using rule 71 (conditions -> rec_conditions .)
+    FULL            reduce using rule 71 (conditions -> rec_conditions .)
+    NAME            reduce using rule 71 (conditions -> rec_conditions .)
+    INDEX           reduce using rule 71 (conditions -> rec_conditions .)
+    AND             shift and go to state 103
+    OR              shift and go to state 104
+
+
+state 79
+
+    (72) conditions -> empty .
+
+    ;               reduce using rule 72 (conditions -> empty .)
+    $end            reduce using rule 72 (conditions -> empty .)
+    GROUP           reduce using rule 72 (conditions -> empty .)
+    ORDER           reduce using rule 72 (conditions -> empty .)
+    LIMIT           reduce using rule 72 (conditions -> empty .)
+    OFFSET          reduce using rule 72 (conditions -> empty .)
+    )               reduce using rule 72 (conditions -> empty .)
+    WHERE           reduce using rule 72 (conditions -> empty .)
+    JOIN            reduce using rule 72 (conditions -> empty .)
+    INNER           reduce using rule 72 (conditions -> empty .)
+    LEFT            reduce using rule 72 (conditions -> empty .)
+    RIGHT           reduce using rule 72 (conditions -> empty .)
+    FULL            reduce using rule 72 (conditions -> empty .)
+    NAME            reduce using rule 72 (conditions -> empty .)
+    INDEX           reduce using rule 72 (conditions -> empty .)
+
+
+state 80
+
+    (73) rec_conditions -> column . op value
+    (82) op -> . >
+    (83) op -> . <
+    (84) op -> . =
+    (85) op -> . LE
+    (86) op -> . GE
+    (87) op -> . NE
+    (88) op -> . LIKE
+
+    >               shift and go to state 106
+    <               shift and go to state 107
+    =               shift and go to state 108
+    LE              shift and go to state 109
+    GE              shift and go to state 110
+    NE              shift and go to state 111
+    LIKE            shift and go to state 112
+
+    op                             shift and go to state 105
+
+state 81
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds . conditions group order limit offset
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM ds . joins conditions group order
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (29) joins -> . join_type ds ON conditions
+    (30) joins -> . joins join_type ds ON conditions
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (31) join_type -> . JOIN
+    (32) join_type -> . INNER JOIN
+    (33) join_type -> . LEFT JOIN
+    (34) join_type -> . RIGHT JOIN
+    (35) join_type -> . FULL JOIN
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    JOIN            shift and go to state 85
+    INNER           shift and go to state 86
+    LEFT            shift and go to state 87
+    RIGHT           shift and go to state 88
+    FULL            shift and go to state 89
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 113
+    joins                          shift and go to state 114
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    join_type                      shift and go to state 84
+    column                         shift and go to state 80
+
+state 82
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds conditions . group order limit offset
+    (89) group -> . GROUP BY columns_list
+    (90) group -> . empty
+    (81) empty -> .
+
+    GROUP           shift and go to state 116
+    ORDER           reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    group                          shift and go to state 115
+    empty                          shift and go to state 117
+
+state 83
+
+    (20) select_statement -> SELECT agg_columns_list FROM ds joins . conditions group order
+    (30) joins -> joins . join_type ds ON conditions
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (31) join_type -> . JOIN
+    (32) join_type -> . INNER JOIN
+    (33) join_type -> . LEFT JOIN
+    (34) join_type -> . RIGHT JOIN
+    (35) join_type -> . FULL JOIN
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    JOIN            shift and go to state 85
+    INNER           shift and go to state 86
+    LEFT            shift and go to state 87
+    RIGHT           shift and go to state 88
+    FULL            shift and go to state 89
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 118
+    join_type                      shift and go to state 119
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 84
+
+    (29) joins -> join_type . ds ON conditions
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 120
+    src                            shift and go to state 37
+
+state 85
+
+    (31) join_type -> JOIN .
+
+    (               reduce using rule 31 (join_type -> JOIN .)
+    NAME            reduce using rule 31 (join_type -> JOIN .)
+    DATASOURCE      reduce using rule 31 (join_type -> JOIN .)
+
+
+state 86
+
+    (32) join_type -> INNER . JOIN
+
+    JOIN            shift and go to state 121
+
+
+state 87
+
+    (33) join_type -> LEFT . JOIN
+
+    JOIN            shift and go to state 122
+
+
+state 88
+
+    (34) join_type -> RIGHT . JOIN
+
+    JOIN            shift and go to state 123
+
+
+state 89
+
+    (35) join_type -> FULL . JOIN
+
+    JOIN            shift and go to state 124
+
+
+state 90
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds FROM . ds conditions limit offset
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 125
+    src                            shift and go to state 37
+
+state 91
+
+    (54) function -> function_name ( column ) .
+
+    AS              reduce using rule 54 (function -> function_name ( column ) .)
+    ,               reduce using rule 54 (function -> function_name ( column ) .)
+    FROM            reduce using rule 54 (function -> function_name ( column ) .)
+    INTO            reduce using rule 54 (function -> function_name ( column ) .)
+
+
+state 92
+
+    (21) insert_statement -> INSERT INTO ds ( columns_list . ) VALUES rows
+    (23) insert_statement -> INSERT INTO ds ( columns_list . ) select_statement
+
+    )               shift and go to state 126
+
+
+state 93
+
+    (40) columns_list -> * .
+
+    )               reduce using rule 40 (columns_list -> * .)
+    ORDER           reduce using rule 40 (columns_list -> * .)
+    LIMIT           reduce using rule 40 (columns_list -> * .)
+    OFFSET          reduce using rule 40 (columns_list -> * .)
+    ;               reduce using rule 40 (columns_list -> * .)
+    $end            reduce using rule 40 (columns_list -> * .)
+
+
+state 94
+
+    (41) columns_list -> rec_columns .
+    (47) rec_columns -> rec_columns . , column
+
+    )               reduce using rule 41 (columns_list -> rec_columns .)
+    ORDER           reduce using rule 41 (columns_list -> rec_columns .)
+    LIMIT           reduce using rule 41 (columns_list -> rec_columns .)
+    OFFSET          reduce using rule 41 (columns_list -> rec_columns .)
+    ;               reduce using rule 41 (columns_list -> rec_columns .)
+    $end            reduce using rule 41 (columns_list -> rec_columns .)
+    ,               shift and go to state 127
+
+
+state 95
+
+    (46) rec_columns -> column .
+
+    ,               reduce using rule 46 (rec_columns -> column .)
+    )               reduce using rule 46 (rec_columns -> column .)
+    ORDER           reduce using rule 46 (rec_columns -> column .)
+    LIMIT           reduce using rule 46 (rec_columns -> column .)
+    OFFSET          reduce using rule 46 (rec_columns -> column .)
+    ;               reduce using rule 46 (rec_columns -> column .)
+    $end            reduce using rule 46 (rec_columns -> column .)
+
+
+state 96
+
+    (22) insert_statement -> INSERT INTO ds VALUES rows .
+
+    ;               reduce using rule 22 (insert_statement -> INSERT INTO ds VALUES rows .)
+    $end            reduce using rule 22 (insert_statement -> INSERT INTO ds VALUES rows .)
+
+
+state 97
+
+    (36) rows -> ( . rec_values )
+    (37) rows -> ( . rec_values ) , rows
+    (38) rec_values -> . value
+    (39) rec_values -> . rec_values , value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    rec_values                     shift and go to state 128
+    value                          shift and go to state 129
+    column                         shift and go to state 134
+
+state 98
+
+    (25) update_statement -> UPDATE ds SET rec_set conditions .
+
+    ;               reduce using rule 25 (update_statement -> UPDATE ds SET rec_set conditions .)
+    $end            reduce using rule 25 (update_statement -> UPDATE ds SET rec_set conditions .)
+
+
+state 99
+
+    (28) rec_set -> rec_set , . column = value
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 135
+
+state 100
+
+    (27) rec_set -> column = . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 134
+    value                          shift and go to state 136
+
+state 101
+
+    (61) ds -> ( select_statement ) AS . NAME
+
+    NAME            shift and go to state 137
+
+
+state 102
+
+    (70) conditions -> WHERE rec_conditions .
+    (74) rec_conditions -> rec_conditions . AND column op value
+    (75) rec_conditions -> rec_conditions . OR column op value
+
+    ;               reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    $end            reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    GROUP           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    ORDER           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    LIMIT           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    OFFSET          reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    )               reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    WHERE           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    JOIN            reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    INNER           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    LEFT            reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    RIGHT           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    FULL            reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    NAME            reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    INDEX           reduce using rule 70 (conditions -> WHERE rec_conditions .)
+    AND             shift and go to state 103
+    OR              shift and go to state 104
+
+
+state 103
+
+    (74) rec_conditions -> rec_conditions AND . column op value
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 138
+
+state 104
+
+    (75) rec_conditions -> rec_conditions OR . column op value
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 139
+
+state 105
+
+    (73) rec_conditions -> column op . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 134
+    value                          shift and go to state 140
+
+state 106
+
+    (82) op -> > .
+
+    NAME            reduce using rule 82 (op -> > .)
+    STRING          reduce using rule 82 (op -> > .)
+    FLOAT           reduce using rule 82 (op -> > .)
+    NUMBER          reduce using rule 82 (op -> > .)
+    INDEX           reduce using rule 82 (op -> > .)
+
+
+state 107
+
+    (83) op -> < .
+
+    NAME            reduce using rule 83 (op -> < .)
+    STRING          reduce using rule 83 (op -> < .)
+    FLOAT           reduce using rule 83 (op -> < .)
+    NUMBER          reduce using rule 83 (op -> < .)
+    INDEX           reduce using rule 83 (op -> < .)
+
+
+state 108
+
+    (84) op -> = .
+
+    NAME            reduce using rule 84 (op -> = .)
+    STRING          reduce using rule 84 (op -> = .)
+    FLOAT           reduce using rule 84 (op -> = .)
+    NUMBER          reduce using rule 84 (op -> = .)
+    INDEX           reduce using rule 84 (op -> = .)
+
+
+state 109
+
+    (85) op -> LE .
+
+    NAME            reduce using rule 85 (op -> LE .)
+    STRING          reduce using rule 85 (op -> LE .)
+    FLOAT           reduce using rule 85 (op -> LE .)
+    NUMBER          reduce using rule 85 (op -> LE .)
+    INDEX           reduce using rule 85 (op -> LE .)
+
+
+state 110
+
+    (86) op -> GE .
+
+    NAME            reduce using rule 86 (op -> GE .)
+    STRING          reduce using rule 86 (op -> GE .)
+    FLOAT           reduce using rule 86 (op -> GE .)
+    NUMBER          reduce using rule 86 (op -> GE .)
+    INDEX           reduce using rule 86 (op -> GE .)
+
+
+state 111
+
+    (87) op -> NE .
+
+    NAME            reduce using rule 87 (op -> NE .)
+    STRING          reduce using rule 87 (op -> NE .)
+    FLOAT           reduce using rule 87 (op -> NE .)
+    NUMBER          reduce using rule 87 (op -> NE .)
+    INDEX           reduce using rule 87 (op -> NE .)
+
+
+state 112
+
+    (88) op -> LIKE .
+
+    NAME            reduce using rule 88 (op -> LIKE .)
+    STRING          reduce using rule 88 (op -> LIKE .)
+    FLOAT           reduce using rule 88 (op -> LIKE .)
+    NUMBER          reduce using rule 88 (op -> LIKE .)
+    INDEX           reduce using rule 88 (op -> LIKE .)
+
+
+state 113
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions . group order limit offset
+    (89) group -> . GROUP BY columns_list
+    (90) group -> . empty
+    (81) empty -> .
+
+    GROUP           shift and go to state 116
+    ORDER           reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    group                          shift and go to state 141
+    empty                          shift and go to state 117
+
+state 114
+
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins . conditions group order
+    (30) joins -> joins . join_type ds ON conditions
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (31) join_type -> . JOIN
+    (32) join_type -> . INNER JOIN
+    (33) join_type -> . LEFT JOIN
+    (34) join_type -> . RIGHT JOIN
+    (35) join_type -> . FULL JOIN
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    JOIN            shift and go to state 85
+    INNER           shift and go to state 86
+    LEFT            shift and go to state 87
+    RIGHT           shift and go to state 88
+    FULL            shift and go to state 89
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 142
+    join_type                      shift and go to state 119
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 115
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds conditions group . order limit offset
+    (91) order -> . ORDER BY orders
+    (92) order -> . empty
+    (81) empty -> .
+
+    ORDER           shift and go to state 144
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    order                          shift and go to state 143
+    empty                          shift and go to state 145
+
+state 116
+
+    (89) group -> GROUP . BY columns_list
+
+    BY              shift and go to state 146
+
+
+state 117
+
+    (90) group -> empty .
+
+    ORDER           reduce using rule 90 (group -> empty .)
+    LIMIT           reduce using rule 90 (group -> empty .)
+    OFFSET          reduce using rule 90 (group -> empty .)
+    ;               reduce using rule 90 (group -> empty .)
+    $end            reduce using rule 90 (group -> empty .)
+    )               reduce using rule 90 (group -> empty .)
+
+
+state 118
+
+    (20) select_statement -> SELECT agg_columns_list FROM ds joins conditions . group order
+    (89) group -> . GROUP BY columns_list
+    (90) group -> . empty
+    (81) empty -> .
+
+    GROUP           shift and go to state 116
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    group                          shift and go to state 147
+    empty                          shift and go to state 117
+
+state 119
+
+    (30) joins -> joins join_type . ds ON conditions
+    (60) ds -> . ( select_statement )
+    (61) ds -> . ( select_statement ) AS NAME
+    (62) ds -> . src
+    (63) ds -> . src AS NAME
+    (64) src -> . NAME
+    (65) src -> . DATASOURCE
+
+    (               shift and go to state 35
+    NAME            shift and go to state 36
+    DATASOURCE      shift and go to state 38
+
+    ds                             shift and go to state 148
+    src                            shift and go to state 37
+
+state 120
+
+    (29) joins -> join_type ds . ON conditions
+
+    ON              shift and go to state 149
+
+
+state 121
+
+    (32) join_type -> INNER JOIN .
+
+    (               reduce using rule 32 (join_type -> INNER JOIN .)
+    NAME            reduce using rule 32 (join_type -> INNER JOIN .)
+    DATASOURCE      reduce using rule 32 (join_type -> INNER JOIN .)
+
+
+state 122
+
+    (33) join_type -> LEFT JOIN .
+
+    (               reduce using rule 33 (join_type -> LEFT JOIN .)
+    NAME            reduce using rule 33 (join_type -> LEFT JOIN .)
+    DATASOURCE      reduce using rule 33 (join_type -> LEFT JOIN .)
+
+
+state 123
+
+    (34) join_type -> RIGHT JOIN .
+
+    (               reduce using rule 34 (join_type -> RIGHT JOIN .)
+    NAME            reduce using rule 34 (join_type -> RIGHT JOIN .)
+    DATASOURCE      reduce using rule 34 (join_type -> RIGHT JOIN .)
+
+
+state 124
+
+    (35) join_type -> FULL JOIN .
+
+    (               reduce using rule 35 (join_type -> FULL JOIN .)
+    NAME            reduce using rule 35 (join_type -> FULL JOIN .)
+    DATASOURCE      reduce using rule 35 (join_type -> FULL JOIN .)
+
+
+state 125
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds FROM ds . conditions limit offset
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    WHERE           shift and go to state 77
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    conditions                     shift and go to state 150
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 126
+
+    (21) insert_statement -> INSERT INTO ds ( columns_list ) . VALUES rows
+    (23) insert_statement -> INSERT INTO ds ( columns_list ) . select_statement
+    (16) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset
+    (17) select_statement -> . SELECT agg_columns_list FROM ds conditions group order limit offset
+    (18) select_statement -> . SELECT agg_columns_list INTO ds FROM ds conditions limit offset
+    (19) select_statement -> . SELECT DISTINCT agg_columns_list FROM ds joins conditions group order
+    (20) select_statement -> . SELECT agg_columns_list FROM ds joins conditions group order
+
+    VALUES          shift and go to state 151
+    SELECT          shift and go to state 11
+
+    select_statement               shift and go to state 152
+
+state 127
+
+    (47) rec_columns -> rec_columns , . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 153
+
+state 128
+
+    (36) rows -> ( rec_values . )
+    (37) rows -> ( rec_values . ) , rows
+    (39) rec_values -> rec_values . , value
+
+    )               shift and go to state 154
+    ,               shift and go to state 155
+
+
+state 129
+
+    (38) rec_values -> value .
+
+    )               reduce using rule 38 (rec_values -> value .)
+    ,               reduce using rule 38 (rec_values -> value .)
+
+
+state 130
+
+    (76) value -> NAME .
+    (52) column -> NAME .
+
+  ! reduce/reduce conflict for ) resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for , resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for WHERE resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for NAME resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for INDEX resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for ; resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for $end resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for AND resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for OR resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for GROUP resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for ORDER resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for LIMIT resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for OFFSET resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for JOIN resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for INNER resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for LEFT resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for RIGHT resolved using rule 52 (column -> NAME .)
+  ! reduce/reduce conflict for FULL resolved using rule 52 (column -> NAME .)
+    )               reduce using rule 52 (column -> NAME .)
+    ,               reduce using rule 52 (column -> NAME .)
+    WHERE           reduce using rule 52 (column -> NAME .)
+    NAME            reduce using rule 52 (column -> NAME .)
+    INDEX           reduce using rule 52 (column -> NAME .)
+    ;               reduce using rule 52 (column -> NAME .)
+    $end            reduce using rule 52 (column -> NAME .)
+    AND             reduce using rule 52 (column -> NAME .)
+    OR              reduce using rule 52 (column -> NAME .)
+    GROUP           reduce using rule 52 (column -> NAME .)
+    ORDER           reduce using rule 52 (column -> NAME .)
+    LIMIT           reduce using rule 52 (column -> NAME .)
+    OFFSET          reduce using rule 52 (column -> NAME .)
+    JOIN            reduce using rule 52 (column -> NAME .)
+    INNER           reduce using rule 52 (column -> NAME .)
+    LEFT            reduce using rule 52 (column -> NAME .)
+    RIGHT           reduce using rule 52 (column -> NAME .)
+    FULL            reduce using rule 52 (column -> NAME .)
+
+  ! )               [ reduce using rule 76 (value -> NAME .) ]
+  ! ,               [ reduce using rule 76 (value -> NAME .) ]
+  ! WHERE           [ reduce using rule 76 (value -> NAME .) ]
+  ! NAME            [ reduce using rule 76 (value -> NAME .) ]
+  ! INDEX           [ reduce using rule 76 (value -> NAME .) ]
+  ! ;               [ reduce using rule 76 (value -> NAME .) ]
+  ! $end            [ reduce using rule 76 (value -> NAME .) ]
+  ! AND             [ reduce using rule 76 (value -> NAME .) ]
+  ! OR              [ reduce using rule 76 (value -> NAME .) ]
+  ! GROUP           [ reduce using rule 76 (value -> NAME .) ]
+  ! ORDER           [ reduce using rule 76 (value -> NAME .) ]
+  ! LIMIT           [ reduce using rule 76 (value -> NAME .) ]
+  ! OFFSET          [ reduce using rule 76 (value -> NAME .) ]
+  ! JOIN            [ reduce using rule 76 (value -> NAME .) ]
+  ! INNER           [ reduce using rule 76 (value -> NAME .) ]
+  ! LEFT            [ reduce using rule 76 (value -> NAME .) ]
+  ! RIGHT           [ reduce using rule 76 (value -> NAME .) ]
+  ! FULL            [ reduce using rule 76 (value -> NAME .) ]
+
+
+state 131
+
+    (77) value -> STRING .
+
+    )               reduce using rule 77 (value -> STRING .)
+    ,               reduce using rule 77 (value -> STRING .)
+    WHERE           reduce using rule 77 (value -> STRING .)
+    NAME            reduce using rule 77 (value -> STRING .)
+    INDEX           reduce using rule 77 (value -> STRING .)
+    ;               reduce using rule 77 (value -> STRING .)
+    $end            reduce using rule 77 (value -> STRING .)
+    AND             reduce using rule 77 (value -> STRING .)
+    OR              reduce using rule 77 (value -> STRING .)
+    GROUP           reduce using rule 77 (value -> STRING .)
+    ORDER           reduce using rule 77 (value -> STRING .)
+    LIMIT           reduce using rule 77 (value -> STRING .)
+    OFFSET          reduce using rule 77 (value -> STRING .)
+    JOIN            reduce using rule 77 (value -> STRING .)
+    INNER           reduce using rule 77 (value -> STRING .)
+    LEFT            reduce using rule 77 (value -> STRING .)
+    RIGHT           reduce using rule 77 (value -> STRING .)
+    FULL            reduce using rule 77 (value -> STRING .)
+
+
+state 132
+
+    (78) value -> FLOAT .
+
+    )               reduce using rule 78 (value -> FLOAT .)
+    ,               reduce using rule 78 (value -> FLOAT .)
+    WHERE           reduce using rule 78 (value -> FLOAT .)
+    NAME            reduce using rule 78 (value -> FLOAT .)
+    INDEX           reduce using rule 78 (value -> FLOAT .)
+    ;               reduce using rule 78 (value -> FLOAT .)
+    $end            reduce using rule 78 (value -> FLOAT .)
+    AND             reduce using rule 78 (value -> FLOAT .)
+    OR              reduce using rule 78 (value -> FLOAT .)
+    GROUP           reduce using rule 78 (value -> FLOAT .)
+    ORDER           reduce using rule 78 (value -> FLOAT .)
+    LIMIT           reduce using rule 78 (value -> FLOAT .)
+    OFFSET          reduce using rule 78 (value -> FLOAT .)
+    JOIN            reduce using rule 78 (value -> FLOAT .)
+    INNER           reduce using rule 78 (value -> FLOAT .)
+    LEFT            reduce using rule 78 (value -> FLOAT .)
+    RIGHT           reduce using rule 78 (value -> FLOAT .)
+    FULL            reduce using rule 78 (value -> FLOAT .)
+
+
+state 133
+
+    (79) value -> NUMBER .
+
+    )               reduce using rule 79 (value -> NUMBER .)
+    ,               reduce using rule 79 (value -> NUMBER .)
+    WHERE           reduce using rule 79 (value -> NUMBER .)
+    NAME            reduce using rule 79 (value -> NUMBER .)
+    INDEX           reduce using rule 79 (value -> NUMBER .)
+    ;               reduce using rule 79 (value -> NUMBER .)
+    $end            reduce using rule 79 (value -> NUMBER .)
+    AND             reduce using rule 79 (value -> NUMBER .)
+    OR              reduce using rule 79 (value -> NUMBER .)
+    GROUP           reduce using rule 79 (value -> NUMBER .)
+    ORDER           reduce using rule 79 (value -> NUMBER .)
+    LIMIT           reduce using rule 79 (value -> NUMBER .)
+    OFFSET          reduce using rule 79 (value -> NUMBER .)
+    JOIN            reduce using rule 79 (value -> NUMBER .)
+    INNER           reduce using rule 79 (value -> NUMBER .)
+    LEFT            reduce using rule 79 (value -> NUMBER .)
+    RIGHT           reduce using rule 79 (value -> NUMBER .)
+    FULL            reduce using rule 79 (value -> NUMBER .)
+
+
+state 134
+
+    (80) value -> column .
+
+    )               reduce using rule 80 (value -> column .)
+    ,               reduce using rule 80 (value -> column .)
+    WHERE           reduce using rule 80 (value -> column .)
+    NAME            reduce using rule 80 (value -> column .)
+    INDEX           reduce using rule 80 (value -> column .)
+    ;               reduce using rule 80 (value -> column .)
+    $end            reduce using rule 80 (value -> column .)
+    AND             reduce using rule 80 (value -> column .)
+    OR              reduce using rule 80 (value -> column .)
+    GROUP           reduce using rule 80 (value -> column .)
+    ORDER           reduce using rule 80 (value -> column .)
+    LIMIT           reduce using rule 80 (value -> column .)
+    OFFSET          reduce using rule 80 (value -> column .)
+    JOIN            reduce using rule 80 (value -> column .)
+    INNER           reduce using rule 80 (value -> column .)
+    LEFT            reduce using rule 80 (value -> column .)
+    RIGHT           reduce using rule 80 (value -> column .)
+    FULL            reduce using rule 80 (value -> column .)
+
+
+state 135
+
+    (28) rec_set -> rec_set , column . = value
+
+    =               shift and go to state 156
+
+
+state 136
+
+    (27) rec_set -> column = value .
+
+    ,               reduce using rule 27 (rec_set -> column = value .)
+    WHERE           reduce using rule 27 (rec_set -> column = value .)
+    NAME            reduce using rule 27 (rec_set -> column = value .)
+    INDEX           reduce using rule 27 (rec_set -> column = value .)
+    ;               reduce using rule 27 (rec_set -> column = value .)
+    $end            reduce using rule 27 (rec_set -> column = value .)
+
+
+state 137
+
+    (61) ds -> ( select_statement ) AS NAME .
+
+    SET             reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    (               reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    VALUES          reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    SELECT          reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    WHERE           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    NAME            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    INDEX           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    ;               reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    $end            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    JOIN            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    INNER           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    LEFT            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    RIGHT           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    FULL            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    GROUP           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    ORDER           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    LIMIT           reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    OFFSET          reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    )               reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    FROM            reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+    ON              reduce using rule 61 (ds -> ( select_statement ) AS NAME .)
+
+
+state 138
+
+    (74) rec_conditions -> rec_conditions AND column . op value
+    (82) op -> . >
+    (83) op -> . <
+    (84) op -> . =
+    (85) op -> . LE
+    (86) op -> . GE
+    (87) op -> . NE
+    (88) op -> . LIKE
+
+    >               shift and go to state 106
+    <               shift and go to state 107
+    =               shift and go to state 108
+    LE              shift and go to state 109
+    GE              shift and go to state 110
+    NE              shift and go to state 111
+    LIKE            shift and go to state 112
+
+    op                             shift and go to state 157
+
+state 139
+
+    (75) rec_conditions -> rec_conditions OR column . op value
+    (82) op -> . >
+    (83) op -> . <
+    (84) op -> . =
+    (85) op -> . LE
+    (86) op -> . GE
+    (87) op -> . NE
+    (88) op -> . LIKE
+
+    >               shift and go to state 106
+    <               shift and go to state 107
+    =               shift and go to state 108
+    LE              shift and go to state 109
+    GE              shift and go to state 110
+    NE              shift and go to state 111
+    LIKE            shift and go to state 112
+
+    op                             shift and go to state 158
+
+state 140
+
+    (73) rec_conditions -> column op value .
+
+    AND             reduce using rule 73 (rec_conditions -> column op value .)
+    OR              reduce using rule 73 (rec_conditions -> column op value .)
+    ;               reduce using rule 73 (rec_conditions -> column op value .)
+    $end            reduce using rule 73 (rec_conditions -> column op value .)
+    GROUP           reduce using rule 73 (rec_conditions -> column op value .)
+    ORDER           reduce using rule 73 (rec_conditions -> column op value .)
+    LIMIT           reduce using rule 73 (rec_conditions -> column op value .)
+    OFFSET          reduce using rule 73 (rec_conditions -> column op value .)
+    )               reduce using rule 73 (rec_conditions -> column op value .)
+    WHERE           reduce using rule 73 (rec_conditions -> column op value .)
+    JOIN            reduce using rule 73 (rec_conditions -> column op value .)
+    INNER           reduce using rule 73 (rec_conditions -> column op value .)
+    LEFT            reduce using rule 73 (rec_conditions -> column op value .)
+    RIGHT           reduce using rule 73 (rec_conditions -> column op value .)
+    FULL            reduce using rule 73 (rec_conditions -> column op value .)
+    NAME            reduce using rule 73 (rec_conditions -> column op value .)
+    INDEX           reduce using rule 73 (rec_conditions -> column op value .)
+
+
+state 141
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group . order limit offset
+    (91) order -> . ORDER BY orders
+    (92) order -> . empty
+    (81) empty -> .
+
+    ORDER           shift and go to state 144
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    order                          shift and go to state 159
+    empty                          shift and go to state 145
+
+state 142
+
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions . group order
+    (89) group -> . GROUP BY columns_list
+    (90) group -> . empty
+    (81) empty -> .
+
+    GROUP           shift and go to state 116
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    group                          shift and go to state 160
+    empty                          shift and go to state 117
+
+state 143
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds conditions group order . limit offset
+    (66) limit -> . LIMIT NUMBER
+    (67) limit -> . empty
+    (81) empty -> .
+
+    LIMIT           shift and go to state 162
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    limit                          shift and go to state 161
+    empty                          shift and go to state 163
+
+state 144
+
+    (91) order -> ORDER . BY orders
+
+    BY              shift and go to state 164
+
+
+state 145
+
+    (92) order -> empty .
+
+    LIMIT           reduce using rule 92 (order -> empty .)
+    OFFSET          reduce using rule 92 (order -> empty .)
+    ;               reduce using rule 92 (order -> empty .)
+    $end            reduce using rule 92 (order -> empty .)
+    )               reduce using rule 92 (order -> empty .)
+
+
+state 146
+
+    (89) group -> GROUP BY . columns_list
+    (40) columns_list -> . *
+    (41) columns_list -> . rec_columns
+    (46) rec_columns -> . column
+    (47) rec_columns -> . rec_columns , column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    *               shift and go to state 93
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    columns_list                   shift and go to state 165
+    rec_columns                    shift and go to state 94
+    column                         shift and go to state 95
+
+state 147
+
+    (20) select_statement -> SELECT agg_columns_list FROM ds joins conditions group . order
+    (91) order -> . ORDER BY orders
+    (92) order -> . empty
+    (81) empty -> .
+
+    ORDER           shift and go to state 144
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    order                          shift and go to state 166
+    empty                          shift and go to state 145
+
+state 148
+
+    (30) joins -> joins join_type ds . ON conditions
+
+    ON              shift and go to state 167
+
+
+state 149
+
+    (29) joins -> join_type ds ON . conditions
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+  ! shift/reduce conflict for WHERE resolved as shift
+  ! shift/reduce conflict for NAME resolved as shift
+  ! shift/reduce conflict for INDEX resolved as shift
+    WHERE           shift and go to state 77
+    JOIN            reduce using rule 81 (empty -> .)
+    INNER           reduce using rule 81 (empty -> .)
+    LEFT            reduce using rule 81 (empty -> .)
+    RIGHT           reduce using rule 81 (empty -> .)
+    FULL            reduce using rule 81 (empty -> .)
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+  ! WHERE           [ reduce using rule 81 (empty -> .) ]
+  ! NAME            [ reduce using rule 81 (empty -> .) ]
+  ! INDEX           [ reduce using rule 81 (empty -> .) ]
+
+    conditions                     shift and go to state 168
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 150
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions . limit offset
+    (66) limit -> . LIMIT NUMBER
+    (67) limit -> . empty
+    (81) empty -> .
+
+    LIMIT           shift and go to state 162
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    limit                          shift and go to state 169
+    empty                          shift and go to state 163
+
+state 151
+
+    (21) insert_statement -> INSERT INTO ds ( columns_list ) VALUES . rows
+    (36) rows -> . ( rec_values )
+    (37) rows -> . ( rec_values ) , rows
+
+    (               shift and go to state 97
+
+    rows                           shift and go to state 170
+
+state 152
+
+    (23) insert_statement -> INSERT INTO ds ( columns_list ) select_statement .
+
+    ;               reduce using rule 23 (insert_statement -> INSERT INTO ds ( columns_list ) select_statement .)
+    $end            reduce using rule 23 (insert_statement -> INSERT INTO ds ( columns_list ) select_statement .)
+
+
+state 153
+
+    (47) rec_columns -> rec_columns , column .
+
+    ,               reduce using rule 47 (rec_columns -> rec_columns , column .)
+    )               reduce using rule 47 (rec_columns -> rec_columns , column .)
+    ORDER           reduce using rule 47 (rec_columns -> rec_columns , column .)
+    LIMIT           reduce using rule 47 (rec_columns -> rec_columns , column .)
+    OFFSET          reduce using rule 47 (rec_columns -> rec_columns , column .)
+    ;               reduce using rule 47 (rec_columns -> rec_columns , column .)
+    $end            reduce using rule 47 (rec_columns -> rec_columns , column .)
+
+
+state 154
+
+    (36) rows -> ( rec_values ) .
+    (37) rows -> ( rec_values ) . , rows
+
+    ;               reduce using rule 36 (rows -> ( rec_values ) .)
+    $end            reduce using rule 36 (rows -> ( rec_values ) .)
+    ,               shift and go to state 171
+
+
+state 155
+
+    (39) rec_values -> rec_values , . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    value                          shift and go to state 172
+    column                         shift and go to state 134
+
+state 156
+
+    (28) rec_set -> rec_set , column = . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 134
+    value                          shift and go to state 173
+
+state 157
+
+    (74) rec_conditions -> rec_conditions AND column op . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 134
+    value                          shift and go to state 174
+
+state 158
+
+    (75) rec_conditions -> rec_conditions OR column op . value
+    (76) value -> . NAME
+    (77) value -> . STRING
+    (78) value -> . FLOAT
+    (79) value -> . NUMBER
+    (80) value -> . column
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 130
+    STRING          shift and go to state 131
+    FLOAT           shift and go to state 132
+    NUMBER          shift and go to state 133
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 134
+    value                          shift and go to state 175
+
+state 159
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order . limit offset
+    (66) limit -> . LIMIT NUMBER
+    (67) limit -> . empty
+    (81) empty -> .
+
+    LIMIT           shift and go to state 162
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    limit                          shift and go to state 176
+    empty                          shift and go to state 163
+
+state 160
+
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group . order
+    (91) order -> . ORDER BY orders
+    (92) order -> . empty
+    (81) empty -> .
+
+    ORDER           shift and go to state 144
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    order                          shift and go to state 177
+    empty                          shift and go to state 145
+
+state 161
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds conditions group order limit . offset
+    (68) offset -> . OFFSET NUMBER
+    (69) offset -> . empty
+    (81) empty -> .
+
+    OFFSET          shift and go to state 179
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    offset                         shift and go to state 178
+    empty                          shift and go to state 180
+
+state 162
+
+    (66) limit -> LIMIT . NUMBER
+
+    NUMBER          shift and go to state 181
+
+
+state 163
+
+    (67) limit -> empty .
+
+    OFFSET          reduce using rule 67 (limit -> empty .)
+    ;               reduce using rule 67 (limit -> empty .)
+    $end            reduce using rule 67 (limit -> empty .)
+    )               reduce using rule 67 (limit -> empty .)
+
+
+state 164
+
+    (91) order -> ORDER BY . orders
+    (93) orders -> . column sort_type
+    (94) orders -> . orders , column sort_type
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    orders                         shift and go to state 182
+    column                         shift and go to state 183
+
+state 165
+
+    (89) group -> GROUP BY columns_list .
+
+    ORDER           reduce using rule 89 (group -> GROUP BY columns_list .)
+    LIMIT           reduce using rule 89 (group -> GROUP BY columns_list .)
+    OFFSET          reduce using rule 89 (group -> GROUP BY columns_list .)
+    ;               reduce using rule 89 (group -> GROUP BY columns_list .)
+    $end            reduce using rule 89 (group -> GROUP BY columns_list .)
+    )               reduce using rule 89 (group -> GROUP BY columns_list .)
+
+
+state 166
+
+    (20) select_statement -> SELECT agg_columns_list FROM ds joins conditions group order .
+
+    ;               reduce using rule 20 (select_statement -> SELECT agg_columns_list FROM ds joins conditions group order .)
+    $end            reduce using rule 20 (select_statement -> SELECT agg_columns_list FROM ds joins conditions group order .)
+    )               reduce using rule 20 (select_statement -> SELECT agg_columns_list FROM ds joins conditions group order .)
+
+
+state 167
+
+    (30) joins -> joins join_type ds ON . conditions
+    (70) conditions -> . WHERE rec_conditions
+    (71) conditions -> . rec_conditions
+    (72) conditions -> . empty
+    (73) rec_conditions -> . column op value
+    (74) rec_conditions -> . rec_conditions AND column op value
+    (75) rec_conditions -> . rec_conditions OR column op value
+    (81) empty -> .
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+  ! shift/reduce conflict for WHERE resolved as shift
+  ! shift/reduce conflict for NAME resolved as shift
+  ! shift/reduce conflict for INDEX resolved as shift
+    WHERE           shift and go to state 77
+    JOIN            reduce using rule 81 (empty -> .)
+    INNER           reduce using rule 81 (empty -> .)
+    LEFT            reduce using rule 81 (empty -> .)
+    RIGHT           reduce using rule 81 (empty -> .)
+    FULL            reduce using rule 81 (empty -> .)
+    GROUP           reduce using rule 81 (empty -> .)
+    ORDER           reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+  ! WHERE           [ reduce using rule 81 (empty -> .) ]
+  ! NAME            [ reduce using rule 81 (empty -> .) ]
+  ! INDEX           [ reduce using rule 81 (empty -> .) ]
+
+    conditions                     shift and go to state 184
+    rec_conditions                 shift and go to state 78
+    empty                          shift and go to state 79
+    column                         shift and go to state 80
+
+state 168
+
+    (29) joins -> join_type ds ON conditions .
+
+    WHERE           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    JOIN            reduce using rule 29 (joins -> join_type ds ON conditions .)
+    INNER           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    LEFT            reduce using rule 29 (joins -> join_type ds ON conditions .)
+    RIGHT           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    FULL            reduce using rule 29 (joins -> join_type ds ON conditions .)
+    NAME            reduce using rule 29 (joins -> join_type ds ON conditions .)
+    INDEX           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    GROUP           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    ORDER           reduce using rule 29 (joins -> join_type ds ON conditions .)
+    ;               reduce using rule 29 (joins -> join_type ds ON conditions .)
+    $end            reduce using rule 29 (joins -> join_type ds ON conditions .)
+    )               reduce using rule 29 (joins -> join_type ds ON conditions .)
+
+
+state 169
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit . offset
+    (68) offset -> . OFFSET NUMBER
+    (69) offset -> . empty
+    (81) empty -> .
+
+    OFFSET          shift and go to state 179
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    offset                         shift and go to state 185
+    empty                          shift and go to state 180
+
+state 170
+
+    (21) insert_statement -> INSERT INTO ds ( columns_list ) VALUES rows .
+
+    ;               reduce using rule 21 (insert_statement -> INSERT INTO ds ( columns_list ) VALUES rows .)
+    $end            reduce using rule 21 (insert_statement -> INSERT INTO ds ( columns_list ) VALUES rows .)
+
+
+state 171
+
+    (37) rows -> ( rec_values ) , . rows
+    (36) rows -> . ( rec_values )
+    (37) rows -> . ( rec_values ) , rows
+
+    (               shift and go to state 97
+
+    rows                           shift and go to state 186
+
+state 172
+
+    (39) rec_values -> rec_values , value .
+
+    )               reduce using rule 39 (rec_values -> rec_values , value .)
+    ,               reduce using rule 39 (rec_values -> rec_values , value .)
+
+
+state 173
+
+    (28) rec_set -> rec_set , column = value .
+
+    ,               reduce using rule 28 (rec_set -> rec_set , column = value .)
+    WHERE           reduce using rule 28 (rec_set -> rec_set , column = value .)
+    NAME            reduce using rule 28 (rec_set -> rec_set , column = value .)
+    INDEX           reduce using rule 28 (rec_set -> rec_set , column = value .)
+    ;               reduce using rule 28 (rec_set -> rec_set , column = value .)
+    $end            reduce using rule 28 (rec_set -> rec_set , column = value .)
+
+
+state 174
+
+    (74) rec_conditions -> rec_conditions AND column op value .
+
+    AND             reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    OR              reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    ;               reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    $end            reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    GROUP           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    ORDER           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    LIMIT           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    OFFSET          reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    )               reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    WHERE           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    JOIN            reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    INNER           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    LEFT            reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    RIGHT           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    FULL            reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    NAME            reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+    INDEX           reduce using rule 74 (rec_conditions -> rec_conditions AND column op value .)
+
+
+state 175
+
+    (75) rec_conditions -> rec_conditions OR column op value .
+
+    AND             reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    OR              reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    ;               reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    $end            reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    GROUP           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    ORDER           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    LIMIT           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    OFFSET          reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    )               reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    WHERE           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    JOIN            reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    INNER           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    LEFT            reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    RIGHT           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    FULL            reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    NAME            reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+    INDEX           reduce using rule 75 (rec_conditions -> rec_conditions OR column op value .)
+
+
+state 176
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit . offset
+    (68) offset -> . OFFSET NUMBER
+    (69) offset -> . empty
+    (81) empty -> .
+
+    OFFSET          shift and go to state 179
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    offset                         shift and go to state 187
+    empty                          shift and go to state 180
+
+state 177
+
+    (19) select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group order .
+
+    ;               reduce using rule 19 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group order .)
+    $end            reduce using rule 19 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group order .)
+    )               reduce using rule 19 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds joins conditions group order .)
+
+
+state 178
+
+    (17) select_statement -> SELECT agg_columns_list FROM ds conditions group order limit offset .
+
+    ;               reduce using rule 17 (select_statement -> SELECT agg_columns_list FROM ds conditions group order limit offset .)
+    $end            reduce using rule 17 (select_statement -> SELECT agg_columns_list FROM ds conditions group order limit offset .)
+    )               reduce using rule 17 (select_statement -> SELECT agg_columns_list FROM ds conditions group order limit offset .)
+
+
+state 179
+
+    (68) offset -> OFFSET . NUMBER
+
+    NUMBER          shift and go to state 188
+
+
+state 180
+
+    (69) offset -> empty .
+
+    ;               reduce using rule 69 (offset -> empty .)
+    $end            reduce using rule 69 (offset -> empty .)
+    )               reduce using rule 69 (offset -> empty .)
+
+
+state 181
+
+    (66) limit -> LIMIT NUMBER .
+
+    OFFSET          reduce using rule 66 (limit -> LIMIT NUMBER .)
+    ;               reduce using rule 66 (limit -> LIMIT NUMBER .)
+    $end            reduce using rule 66 (limit -> LIMIT NUMBER .)
+    )               reduce using rule 66 (limit -> LIMIT NUMBER .)
+
+
+state 182
+
+    (91) order -> ORDER BY orders .
+    (94) orders -> orders . , column sort_type
+
+    LIMIT           reduce using rule 91 (order -> ORDER BY orders .)
+    OFFSET          reduce using rule 91 (order -> ORDER BY orders .)
+    ;               reduce using rule 91 (order -> ORDER BY orders .)
+    $end            reduce using rule 91 (order -> ORDER BY orders .)
+    )               reduce using rule 91 (order -> ORDER BY orders .)
+    ,               shift and go to state 189
+
+
+state 183
+
+    (93) orders -> column . sort_type
+    (95) sort_type -> . ASC
+    (96) sort_type -> . DESC
+    (97) sort_type -> . empty
+    (81) empty -> .
+
+    ASC             shift and go to state 191
+    DESC            shift and go to state 192
+    ,               reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    sort_type                      shift and go to state 190
+    empty                          shift and go to state 193
+
+state 184
+
+    (30) joins -> joins join_type ds ON conditions .
+
+    WHERE           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    JOIN            reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    INNER           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    LEFT            reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    RIGHT           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    FULL            reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    NAME            reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    INDEX           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    GROUP           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    ORDER           reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    ;               reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    $end            reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+    )               reduce using rule 30 (joins -> joins join_type ds ON conditions .)
+
+
+state 185
+
+    (18) select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit offset .
+
+    ;               reduce using rule 18 (select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit offset .)
+    $end            reduce using rule 18 (select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit offset .)
+    )               reduce using rule 18 (select_statement -> SELECT agg_columns_list INTO ds FROM ds conditions limit offset .)
+
+
+state 186
+
+    (37) rows -> ( rec_values ) , rows .
+
+    ;               reduce using rule 37 (rows -> ( rec_values ) , rows .)
+    $end            reduce using rule 37 (rows -> ( rec_values ) , rows .)
+
+
+state 187
+
+    (16) select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset .
+
+    ;               reduce using rule 16 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset .)
+    $end            reduce using rule 16 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset .)
+    )               reduce using rule 16 (select_statement -> SELECT DISTINCT agg_columns_list FROM ds conditions group order limit offset .)
+
+
+state 188
+
+    (68) offset -> OFFSET NUMBER .
+
+    ;               reduce using rule 68 (offset -> OFFSET NUMBER .)
+    $end            reduce using rule 68 (offset -> OFFSET NUMBER .)
+    )               reduce using rule 68 (offset -> OFFSET NUMBER .)
+
+
+state 189
+
+    (94) orders -> orders , . column sort_type
+    (52) column -> . NAME
+    (53) column -> . INDEX
+
+    NAME            shift and go to state 25
+    INDEX           shift and go to state 26
+
+    column                         shift and go to state 194
+
+state 190
+
+    (93) orders -> column sort_type .
+
+    ,               reduce using rule 93 (orders -> column sort_type .)
+    LIMIT           reduce using rule 93 (orders -> column sort_type .)
+    OFFSET          reduce using rule 93 (orders -> column sort_type .)
+    ;               reduce using rule 93 (orders -> column sort_type .)
+    $end            reduce using rule 93 (orders -> column sort_type .)
+    )               reduce using rule 93 (orders -> column sort_type .)
+
+
+state 191
+
+    (95) sort_type -> ASC .
+
+    ,               reduce using rule 95 (sort_type -> ASC .)
+    LIMIT           reduce using rule 95 (sort_type -> ASC .)
+    OFFSET          reduce using rule 95 (sort_type -> ASC .)
+    ;               reduce using rule 95 (sort_type -> ASC .)
+    $end            reduce using rule 95 (sort_type -> ASC .)
+    )               reduce using rule 95 (sort_type -> ASC .)
+
+
+state 192
+
+    (96) sort_type -> DESC .
+
+    ,               reduce using rule 96 (sort_type -> DESC .)
+    LIMIT           reduce using rule 96 (sort_type -> DESC .)
+    OFFSET          reduce using rule 96 (sort_type -> DESC .)
+    ;               reduce using rule 96 (sort_type -> DESC .)
+    $end            reduce using rule 96 (sort_type -> DESC .)
+    )               reduce using rule 96 (sort_type -> DESC .)
+
+
+state 193
+
+    (97) sort_type -> empty .
+
+    ,               reduce using rule 97 (sort_type -> empty .)
+    LIMIT           reduce using rule 97 (sort_type -> empty .)
+    OFFSET          reduce using rule 97 (sort_type -> empty .)
+    ;               reduce using rule 97 (sort_type -> empty .)
+    $end            reduce using rule 97 (sort_type -> empty .)
+    )               reduce using rule 97 (sort_type -> empty .)
+
+
+state 194
+
+    (94) orders -> orders , column . sort_type
+    (95) sort_type -> . ASC
+    (96) sort_type -> . DESC
+    (97) sort_type -> . empty
+    (81) empty -> .
+
+    ASC             shift and go to state 191
+    DESC            shift and go to state 192
+    ,               reduce using rule 81 (empty -> .)
+    LIMIT           reduce using rule 81 (empty -> .)
+    OFFSET          reduce using rule 81 (empty -> .)
+    ;               reduce using rule 81 (empty -> .)
+    $end            reduce using rule 81 (empty -> .)
+    )               reduce using rule 81 (empty -> .)
+
+    sort_type                      shift and go to state 195
+    empty                          shift and go to state 193
+
+state 195
+
+    (94) orders -> orders , column sort_type .
+
+    ,               reduce using rule 94 (orders -> orders , column sort_type .)
+    LIMIT           reduce using rule 94 (orders -> orders , column sort_type .)
+    OFFSET          reduce using rule 94 (orders -> orders , column sort_type .)
+    ;               reduce using rule 94 (orders -> orders , column sort_type .)
+    $end            reduce using rule 94 (orders -> orders , column sort_type .)
+    )               reduce using rule 94 (orders -> orders , column sort_type .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for WHERE in state 149 resolved as shift
+WARNING: shift/reduce conflict for NAME in state 149 resolved as shift
+WARNING: shift/reduce conflict for INDEX in state 149 resolved as shift
+WARNING: shift/reduce conflict for WHERE in state 167 resolved as shift
+WARNING: shift/reduce conflict for NAME in state 167 resolved as shift
+WARNING: shift/reduce conflict for INDEX in state 167 resolved as shift
+WARNING: reduce/reduce conflict in state 130 resolved using rule (column -> NAME)
+WARNING: rejected rule (value -> NAME) in state 130
+WARNING: Rule (value -> NAME) is never reduced

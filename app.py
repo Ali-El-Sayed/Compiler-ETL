@@ -6,16 +6,18 @@ from flask import request
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def dark():
     return render_template("index.html")
+
 
 @app.route('/light')
 def light():
     return render_template("light.html")
 
 
-@app.route('/sqlp',  methods = ['POST'])
+@app.route('/sqlp', methods=['POST'])
 def sqltopandas():
     My_parser = parser()
 
@@ -26,7 +28,7 @@ def sqltopandas():
         ast = My_parser.parse(statements)
     except Exception as e:
         return str(e)
-        
+
     result_code = []
 
     # set configs
@@ -54,5 +56,4 @@ def sqltopandas():
             result_code += etl.select_into(statement['statement_parser'])[1]
         result_code += [''] * 4
 
-    return  '\n'.join(result_code)
-
+    return '\n'.join(result_code)
